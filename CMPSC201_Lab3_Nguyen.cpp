@@ -2,17 +2,26 @@
 #include <math.h>
 #include <ctype.h>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
 double N_shares, P_shares, P_commission, A_return, Year;
 double totalPaidNoComs, totalComsFee, totalPaid, totalTenYears;
-
 char input;
 
 int main()
 {
-    ifstream txt_input;
-    
+    ifstream txt_input ("input.txt");
+    if(!txt_input)
+    {
+        cout << "Error file can't be open";
+    }
+    txt_input >> N_shares;
+    txt_input >> P_shares;
+    txt_input >> P_commission;
+    txt_input >> A_return;
+    txt_input >> Year;
+    txt_input.close();
 
     totalPaidNoComs = N_shares*P_shares;
     cout << "The amount you paid for the stock alone (without the commission): " << totalPaidNoComs << "\n";
@@ -28,7 +37,7 @@ int main()
     if(tolower(input) == 'y')
     {
         ofstream output;
-
+        output << setw(10) << "Hoang Nguyen";
     } 
     else if (tolower(input) == 'n') 
     {
