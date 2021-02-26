@@ -11,10 +11,11 @@ char input;
 
 int main()
 {
-    ifstream txt_input ("input.txt");
+    ifstream txt_input ("sample.txt");
     if(!txt_input)
     {
-        cout << "Error file can't be open";
+      cout << "Error file can't be open\n";
+      return 1;
     }
     txt_input >> N_shares;
     txt_input >> P_shares;
@@ -37,7 +38,7 @@ int main()
     if(tolower(input) == 'y')
     {
         ofstream output("receipt.txt");
-        if(!output){cout<<"Trying to write fail.";}
+        if(!output){cout<<"Trying to write fail."; return 1;}
         output << setfill(' ') << setw(30) << left << "Hoang Nguyen";
         output << setfill('-') << setw(42) << "\n-";
         output << setfill(' ') << setw(31) << "\nTotal Stock: " << setprecision(2) << fixed << right << setw(1) << "$" << setw(10) << totalPaidNoComs << "\n";
