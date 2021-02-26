@@ -32,14 +32,23 @@ int main()
     totalTenYears = totalPaidNoComs * pow(1 + A_return/100, Year);
     cout << "After 10 years, all of your shares will worth: " << totalTenYears << "\n";
     
-    cout << "Would you like a receipt? Y/N";
+    cout << "Would you like a receipt? Y/N\n";
     cin >> input;
     if(tolower(input) == 'y')
     {
-        ofstream output;
-        output << setw(10) << "Hoang Nguyen";
+        ofstream output("receipt.txt");
+        if(!output){cout<<"Trying to write fail.";}
+        output << setfill(' ') << setw(30) << left << "Hoang Nguyen";
+        output << setfill('-') << setw(42) << "\n-";
+        output << setfill(' ') << setw(31) << "\nTotal Stock: " << setprecision(2) << fixed << right << setw(1) << "$" << setw(10) << totalPaidNoComs << "\n";
+        output << setw(30) << left << "Commission: " << right << setw(1) << "$" << setw(10) << totalComsFee << "\n";
+        output << setw(30) << left << "Total amount: " << right << setw(1) << "$" << setw(10) << totalPaid << "\n";
+        string str = "Net worth in " + to_string((int)Year) + " years: ";
+        output << setw(30) << left << str << right << setw(1) << "$" << setprecision(2) << setw(10) << totalTenYears << "\n";
+        cout << "Receipt printed";
+        output.close();
     } 
-    else if (tolower(input) == 'n') 
+    else
     {
         cout<<"Have a nice day";
     }
